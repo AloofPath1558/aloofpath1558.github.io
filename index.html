@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<title>Portfolio GitHub — AloofPath1558</title>
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--border:#30363d;
+  --text:#f0f6fc;--muted:#8b949e;--accent:#58a6ff;--accent2:#bc8cff;
+  --green:#3fb950;--shadow:0 18px 60px rgba(0,0,0,.35)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(900px 500px at 10% -10%,rgba(88,166,255,.18),transparent 60%),
+  radial-gradient(800px 500px at 100% 10%,rgba(188,140,255,.13),transparent 60%),
+  var(--bg);color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+a{color:inherit}
+.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+.hero{padding:64px 0 38px}
+.hero-grid{display:grid;grid-template-columns:140px 1fr auto;gap:28px;align-items:center}
+.avatar{width:140px;height:140px;border-radius:50%;border:1px solid var(--border);box-shadow:0 0 0 8px rgba(88,166,255,.05),var(--shadow)}
+.kicker{color:var(--accent);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}
+h1{font-size:clamp(2.3rem,6vw,4.5rem);line-height:.95;letter-spacing:-.055em;margin:8px 0 14px}
+.bio{color:var(--muted);font-size:1.05rem;max-width:720px;line-height:1.65;margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border:1px solid var(--border);border-radius:10px;text-decoration:none;background:var(--panel);font-weight:750}
+.btn:hover{border-color:#58616c;background:var(--panel2);transform:translateY(-1px)}
+.btn.primary{background:#238636;border-color:#2ea043}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.stat{border:1px solid var(--border);background:rgba(22,27,34,.72);padding:12px 16px;border-radius:12px;min-width:115px}
+.stat b{display:block;font-size:1.25rem}.stat span{font-size:.78rem;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:35px 0 18px}
+.section-head h2{margin:0;font-size:1.45rem;letter-spacing:-.02em}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:.9rem}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.search{flex:1;min-width:230px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:13px 15px;font-size:.95rem;outline:none}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(88,166,255,.12)}
+.select{background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:12px 14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{
+  position:relative;display:flex;flex-direction:column;min-height:255px;padding:20px;
+  background:linear-gradient(180deg,rgba(22,27,34,.96),rgba(13,17,23,.96));
+  border:1px solid var(--border);border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,.16);
+  transition:.2s ease;overflow:hidden
+}
+.card:before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:.2s}
+.card:hover{transform:translateY(-5px);border-color:#4a535e;box-shadow:var(--shadow)}
+.card:hover:before{opacity:1}
+.card-top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.repo-name{font-size:1.08rem;font-weight:800;word-break:break-word}
+.badge{font-size:.68rem;border:1px solid var(--border);color:var(--muted);padding:4px 7px;border-radius:999px;white-space:nowrap}
+.desc{color:var(--muted);line-height:1.55;font-size:.9rem;margin:13px 0 16px;flex:1}
+.topics{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:15px}
+.topic{font-size:.7rem;color:#79c0ff;background:rgba(56,139,253,.12);padding:4px 8px;border-radius:999px}
+.meta{display:flex;gap:14px;color:var(--muted);font-size:.78rem;margin-bottom:16px}
+.actions-card{display:flex;gap:8px}
+.actions-card a{flex:1}
+.site{background:#1f6feb;border-color:#1f6feb}
+.lang{display:flex;align-items:center;gap:6px;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.empty,.loading,.error{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);border:1px dashed var(--border);border-radius:14px}
+.error{color:#ff7b72}
+footer{padding:55px 0 70px;text-align:center;color:var(--muted);font-size:.78rem}
+.pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 0 5px rgba(63,185,80,.1)}
+@media(max-width:900px){.hero-grid{grid-template-columns:100px 1fr}.avatar{width:100px;height:100px}.actions{grid-column:1/-1;justify-content:flex-start}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.wrap{width:min(100% - 22px,1180px)}.hero{padding-top:35px}.hero-grid{grid-template-columns:1fr}.avatar{width:92px;height:92px}.actions{grid-column:auto}.grid{grid-template-columns:1fr}h1{font-size:3rem}.stats{display:grid;grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-grid">
+      <img id="avatar" class="avatar" alt="Avatar GitHub">
+      <div>
+        <div class="kicker">GitHub Portfolio</div>
+        <h1 id="name">Caricamento…</h1>
+        <p class="bio" id="bio">Sto recuperando il profilo e i progetti direttamente da GitHub.</p>
+        <div class="stats">
+          <div class="stat"><b id="repoCount">—</b><span>repository pubbliche</span></div>
+          <div class="stat"><b id="followers">—</b><span>follower</span></div>
+          <div class="stat"><b id="stars">—</b><span>stelle totali</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <a id="profileLink" class="btn primary" target="_blank" rel="noopener">⌁ GitHub</a>
+        <a href="#projects" class="btn">↓ Progetti</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <div>
+        <h2>Progetti</h2>
+        <p><span class="pulse"></span><span id="status">Connessione a GitHub…</span></p>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" class="search" type="search" placeholder="🔎 Cerca un progetto…">
+      <select id="language" class="select">
+        <option value="">Tutti i linguaggi</option>
+      </select>
+      <select id="sort" class="select">
+        <option value="updated">Ultimamente aggiornati</option>
+        <option value="stars">Più stelle</option>
+        <option value="name">Nome A–Z</option>
+      </select>
+    </div>
+
+    <div id="grid" class="grid">
+      <div class="loading">Caricamento dei progetti…</div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Aggiornato automaticamente · dati pubblici forniti dalle API REST di GitHub
+</footer>
+
+<script>
+const GITHUB_USERNAME = "AloofPath1558";
+const REFRESH_MS = 60_000;
+const HIDDEN_REPOS = []; // es. ["repo-da-non-mostrare"]
+let allRepos = [];
+
+const $ = id => document.getElementById(id);
+
+function esc(v){
+  return String(v ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function siteFor(repo){
+  // Priorità al sito impostato nelle impostazioni del repository.
+  if(repo.homepage && repo.homepage.trim()) return repo.homepage.trim();
+
+  // Fallback GitHub Pages.
+  if(repo.has_pages){
+    return repo.name.toLowerCase() === `${GITHUB_USERNAME.toLowerCase()}.github.io`
+      ? `https://${GITHUB_USERNAME}.github.io/`
+      : `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
+  }
+  return null;
+}
+
+function render(){
+  const q = $("search").value.trim().toLowerCase();
+  const lang = $("language").value;
+  const sort = $("sort").value;
+
+  let repos = allRepos.filter(r =>
+    !HIDDEN_REPOS.includes(r.name) &&
+    (!q || `${r.name} ${r.description || ""} ${(r.topics || []).join(" ")}`.toLowerCase().includes(q)) &&
+    (!lang || (r.language || "") === lang)
+  );
+
+  repos.sort((a,b)=>{
+    if(sort==="stars") return b.stargazers_count-a.stargazers_count;
+    if(sort==="name") return a.name.localeCompare(b.name);
+    return new Date(b.pushed_at || b.updated_at) - new Date(a.pushed_at || a.updated_at);
+  });
+
+  if(!repos.length){
+    $("grid").innerHTML = `<div class="empty">Nessun progetto corrisponde alla ricerca.</div>`;
+    return;
+  }
+
+  $("grid").innerHTML = repos.map(repo=>{
+    const site = siteFor(repo);
+    const topics = (repo.topics || []).slice(0,5);
+    const language = repo.language ? `
+      <span class="lang"><i class="dot"></i>${esc(repo.language)}</span>` : "";
+
+    return `
+      <article class="card">
+        <div class="card-top">
+          <div class="repo-name">◈ ${esc(repo.name)}</div>
+          <span class="badge">${repo.archived ? "archiviato" : "pubblico"}</span>
+        </div>
+        <p class="desc">${esc(repo.description || "Nessuna descrizione disponibile.")}</p>
+        ${topics.length ? `<div class="topics">${topics.map(t=>`<span class="topic">${esc(t)}</span>`).join("")}</div>` : ""}
+        <div class="meta">
+          ${language}
+          <span>★ ${repo.stargazers_count}</span>
+          <span>⑂ ${repo.forks_count}</span>
+        </div>
+        <div class="actions-card">
+          ${site ? `<a class="btn site" href="${esc(site)}" target="_blank" rel="noopener">🌐 Apri sito</a>` : ""}
+          <a class="btn" href="${esc(repo.html_url)}" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+async function load(){
+  try{
+    $("status").textContent = "aggiornamento in corso…";
+
+    const [profileRes, reposRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}`, {cache:"no-store"}),
+      fetch(`https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?type=owner&sort=updated&direction=desc&per_page=100`, {cache:"no-store"})
+    ]);
+
+    if(!profileRes.ok || !reposRes.ok) throw new Error("GitHub API non disponibile");
+
+    const profile = await profileRes.json();
+    const repos = await reposRes.json();
+
+    allRepos = repos.filter(r => !r.fork && r.visibility === "public");
+
+    $("avatar").src = profile.avatar_url;
+    $("name").textContent = profile.name || profile.login;
+    $("bio").textContent = profile.bio || "Progetti, esperimenti e cose che sto costruendo.";
+    $("profileLink").href = profile.html_url;
+    $("repoCount").textContent = allRepos.length;
+    $("followers").textContent = profile.followers;
+
+    const totalStars = allRepos.reduce((sum,r)=>sum+r.stargazers_count,0);
+    $("stars").textContent = totalStars;
+
+    const languages = [...new Set(allRepos.map(r=>r.language).filter(Boolean))].sort();
+    const currentLang = $("language").value;
+    $("language").innerHTML = `<option value="">Tutti i linguaggi</option>` +
+      languages.map(l=>`<option value="${esc(l)}">${esc(l)}</option>`).join("");
+    if(languages.includes(currentLang)) $("language").value=currentLang;
+
+    const time = new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
+    $("status").textContent = `${allRepos.length} progetti · sincronizzato alle ${time}`;
+
+    render();
+  }catch(e){
+    console.error(e);
+    $("grid").innerHTML = `<div class="error">⚠️ Impossibile caricare i progetti da GitHub.<br>Controlla la connessione o riprova tra poco.</div>`;
+    $("status").textContent = "errore di connessione";
+  }
+}
+
+$("search").addEventListener("input", render);
+$("language").addEventListener("change", render);
+$("sort").addEventListener("change", render);
+
+load();
+setInterval(load, REFRESH_MS);
+</script>
+</body>
+</html>
